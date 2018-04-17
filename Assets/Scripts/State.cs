@@ -8,6 +8,7 @@ public class State  {
     private GameWorld gameWorld;
     private int visitCount;
     private int stateScore;
+    public double winScore;
 
     public State() //Unfinished
     {
@@ -19,6 +20,7 @@ public class State  {
         this.gameWorld = new GameWorld(state.GetGameWorld());
         this.visitCount = state.GetVisitCount();
         this.stateScore = state.GetStateScore();
+        this.winScore = state.GetWinScore();
     }
 
     public State(GameWorld gameWorld)
@@ -52,6 +54,22 @@ public class State  {
     void SetGameWorld(GameWorld gameWorld)
     {
         this.gameWorld = gameWorld;
+    }
+
+    public double GetWinScore()
+    {
+        return winScore;
+    }
+
+    void SetWinScore(double score)
+    {
+        this.winScore = score;
+    }
+
+    void AddScore(double score)
+    {
+        if (this.winScore != int.MaxValue)
+            this.winScore += score;
     }
 
     public int GetVisitCount()
