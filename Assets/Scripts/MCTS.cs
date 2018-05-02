@@ -45,6 +45,8 @@ public class MCTS : MonoBehaviour {
             //1- Selection
             Node promisingNode = SelectPromisingNode(rootNode);
             //2 - Expansion
+
+
         }
     }
 
@@ -60,6 +62,17 @@ public class MCTS : MonoBehaviour {
         return node;
     }
 
+    private void ExpandNode(Node node)
+    {
+        List<State> possibleGameStates = node.GetState().GetAvailableStates();
+        
+        foreach(State state in possibleGameStates)
+        {
+            Node newNode = new Node(state);
+            newNode.SetParent(node);
+            node.GetChildArray().Add(newNode);
+        }
+    }
 
 	// Use this for initialization
 	void Start () {
