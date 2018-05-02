@@ -15,7 +15,7 @@ public class UCT  {
         return (nodeWinScore / nodeVisit) + 1.41 * Mathf.Sqrt(Mathf.Log(totalVisit) / nodeVisit);
     }
 
-    static Node FindBestWithUCT(Node node)
+    public static Node FindBestWithUCT(Node node)
     {
         int parentCount = node.GetState().GetVisitCount();
 

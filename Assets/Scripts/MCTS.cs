@@ -43,13 +43,21 @@ public class MCTS : MonoBehaviour {
         while (time.Millisecond < end)
         {
             //1- Selection
-            Node promisingNode;
+            Node promisingNode = SelectPromisingNode(rootNode);
+            //2 - Expansion
         }
     }
 
-    private Node selectPromisingNode(Node rootNode)
+    private Node SelectPromisingNode(Node rootNode)
     {
         Node node = rootNode;
+
+        while(node.GetChildArray().Count != 0)
+        {
+            node = UCT.FindBestWithUCT(node);
+        }
+
+        return node;
     }
 
 
