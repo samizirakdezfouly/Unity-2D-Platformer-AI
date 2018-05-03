@@ -282,9 +282,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\BreadCrumbFollow2D.cs" />
     <Compile Include="Assets\Scripts\Companion.cs" />
     <Compile Include="Assets\Scripts\CompanionMovement.cs" />
+    <Compile Include="Assets\Scripts\EnemyMovement.cs" />
     <Compile Include="Assets\Scripts\FollowPath.cs" />
     <Compile Include="Assets\Scripts\GameWorld.cs" />
     <Compile Include="Assets\Scripts\MCTS.cs" />

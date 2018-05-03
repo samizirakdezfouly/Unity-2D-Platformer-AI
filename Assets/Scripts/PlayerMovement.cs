@@ -8,8 +8,6 @@ public class PlayerMovement : MonoBehaviour {
 
     private Animator playerAnimator;
 
-    public GameObject weapon;
-
     [SerializeField]
     private Transform[] groundPoints;
     [SerializeField]
@@ -106,7 +104,6 @@ public class PlayerMovement : MonoBehaviour {
     {
         if(attacking && !this.playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
-            //weapon.SetActive(true);
             playerAnimator.SetTrigger("meleeAttack");
             playerRigidbody.velocity = Vector2.zero;
         }
@@ -152,7 +149,6 @@ public class PlayerMovement : MonoBehaviour {
     {
         attacking = false;
         jump = false;
-        //weapon.SetActive(false);
     }
 
 }

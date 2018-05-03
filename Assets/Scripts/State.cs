@@ -82,7 +82,7 @@ public class State  {
         this.visitCount = visitCount;
     }
 
-    void IncreaseVisit()
+    public void IncreaseVisit()
     {
         this.visitCount++;
     }

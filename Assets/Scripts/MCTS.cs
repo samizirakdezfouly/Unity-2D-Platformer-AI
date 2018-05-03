@@ -27,28 +27,37 @@ public class MCTS : MonoBehaviour {
         return 2 * (this.level - 1) + 1;
     }
 
-    public GameWorld FindNextMove(GameWorld game)
-    {
-        DateTime time = new DateTime();
+    //public GameWorld FindNextMove(GameWorld game)
+    //{
+    //    DateTime time = new DateTime();
 
-        long start = time.Millisecond;
-        long end = start + 60 * GetMillisecondsForCurrentLevel();
+    //    long start = time.Millisecond;
+    //    long end = start + 60 * GetMillisecondsForCurrentLevel();
 
-        Tree tree = new Tree();
-        Node rootNode = tree.GetRoot();
+    //    Tree tree = new Tree();
+    //    Node rootNode = tree.GetRoot();
 
-        rootNode.GetState(); //More needed
-        rootNode.GetState(); //More needed
+    //    rootNode.GetState(); //More needed
+    //    rootNode.GetState(); //More needed
 
-        while (time.Millisecond < end)
-        {
-            //1- Selection
-            Node promisingNode = SelectPromisingNode(rootNode);
-            //2 - Expansion
+    //    while (time.Millisecond < end)
+    //    {
+    //        //1- Selection
+    //        Node promisingNode = SelectPromisingNode(rootNode);
+    //        //2 - Expansion
+    //        ExpandNode(promisingNode);
+    //        //3 - Simulation
+    //        Node nodeToExplore = promisingNode;
 
+    //        if (promisingNode.GetChildArray().Count > 0)
+    //        {
+    //            nodeToExplore = promisingNode.GetRandomChildNode();
+    //        }
 
-        }
-    }
+    //        int playoutResult; 
+
+    //    }
+    //}
 
     private Node SelectPromisingNode(Node rootNode)
     {
@@ -71,6 +80,16 @@ public class MCTS : MonoBehaviour {
             Node newNode = new Node(state);
             newNode.SetParent(node);
             node.GetChildArray().Add(newNode);
+        }
+    }
+
+    private void BackPropogation(Node nodeToExplore)
+    {
+        Node tempNode = nodeToExplore;
+
+        while (tempNode != null)
+        {
+            tempNode.GetState().IncreaseVisit();
         }
     }
 
