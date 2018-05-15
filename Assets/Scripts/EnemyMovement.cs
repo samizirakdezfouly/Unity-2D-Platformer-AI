@@ -28,6 +28,10 @@ public class EnemyMovement : MonoBehaviour {
 
     private Rigidbody2D enemyRb;
 
+    private bool playerDisabled = false;
+
+    public PlayerHealth playerHealth;
+
     
     void Start ()
     {
@@ -38,6 +42,16 @@ public class EnemyMovement : MonoBehaviour {
 
 	void Update ()
     {
+
+        if(playerHealth.health == 0)
+        {
+            playerDisabled = true;
+        }
+        else
+        {
+            playerDisabled = false;
+        }
+
         if(inFOV == true)
             timer += Time.deltaTime;
         else
@@ -74,7 +88,7 @@ public class EnemyMovement : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Player")
+        if(other.tag == "Player" && playerDisabled == false)
         {
             inFOV = true;
             if(facingRight && other.transform.position.x < transform.position.x)
@@ -104,13 +118,7 @@ public class EnemyMovement : MonoBehaviour {
     {
         if(other.tag == "Player")
         {
-            inFOV = false;
-            canFlip = true;
-            charging = false;
-            enemyRb.velocity = new Vector2(0, 0);
-            enemyAnimator.SetBool("isCharging",false);
-            enemyAnimator.SetBool("isReadyToCharge", false);
-            damageColl.enabled = false;
+            Reset();
         }
     }
 
@@ -128,6 +136,18 @@ public class EnemyMovement : MonoBehaviour {
         transform.localScale = enemyScale;
 
         facingRight = !facingRight;
+    }
+
+    private void Reset()
+    {
+        inFOV = false;
+        canFlip = true;
+        charging = false;
+        enemyRb.velocity = new Vector2(0, 0);
+        enemyAnimator.SetBool("isCharging", false);
+        enemyAnimator.SetBool("isReadyToCharge", false);
+        damageColl.enabled = false;
+        Flip();
     }
 
 }

@@ -105,7 +105,7 @@ public class PlayerMovement : MonoBehaviour {
         if(attacking && !this.playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
             playerAnimator.SetTrigger("meleeAttack");
-            playerRigidbody.velocity = Vector2.zero;
+            //playerRigidbody.velocity = Vector2.zero;
         }
     }
 

@@ -18,6 +18,8 @@ public class EnemyDamage : MonoBehaviour {
 
     private float knockbackTimer = 0.0f;
 
+    public int attackDamage = 50;
+
     private bool isStunned;
 	
 	void Start ()
@@ -31,6 +33,8 @@ public class EnemyDamage : MonoBehaviour {
         if(other.tag == "Player")
         {
             isStunned = true;
+
+            other.SendMessage("TakeDamage", attackDamage);
         }
     }
 
