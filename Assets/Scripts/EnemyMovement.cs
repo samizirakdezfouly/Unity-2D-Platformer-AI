@@ -12,7 +12,7 @@ public class EnemyMovement : MonoBehaviour {
 
     public float timer = 0.0f;
 
-
+    public EdgeCollider2D damageColl;
 
     private float nextFlipChance = 0f;
 
@@ -57,7 +57,8 @@ public class EnemyMovement : MonoBehaviour {
         {           
             if (chargeBuildUp < timer)
             {
-                Debug.Log("Please");
+                damageColl.enabled = true;
+
                 if (!facingRight)
                 {
                     enemyRb.AddForce(new Vector2(-1, 0) * speed);
@@ -109,6 +110,7 @@ public class EnemyMovement : MonoBehaviour {
             enemyRb.velocity = new Vector2(0, 0);
             enemyAnimator.SetBool("isCharging",false);
             enemyAnimator.SetBool("isReadyToCharge", false);
+            damageColl.enabled = false;
         }
     }
 

@@ -282,18 +282,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Companion AI\GameWorld.cs" />
+    <Compile Include="Assets\Scripts\Companion AI\MCTS.cs" />
+    <Compile Include="Assets\Scripts\Companion AI\Node.cs" />
+    <Compile Include="Assets\Scripts\Companion AI\State.cs" />
+    <Compile Include="Assets\Scripts\Companion AI\Tree.cs" />
+    <Compile Include="Assets\Scripts\Companion AI\UCT.cs" />
     <Compile Include="Assets\Scripts\Companion.cs" />
     <Compile Include="Assets\Scripts\CompanionMovement.cs" />
+    <Compile Include="Assets\Scripts\EnemyDamage.cs" />
     <Compile Include="Assets\Scripts\EnemyMovement.cs" />
     <Compile Include="Assets\Scripts\FollowPath.cs" />
-    <Compile Include="Assets\Scripts\GameWorld.cs" />
-    <Compile Include="Assets\Scripts\MCTS.cs" />
-    <Compile Include="Assets\Scripts\Node.cs" />
+    <Compile Include="Assets\Scripts\IgnoreCollider.cs" />
+    <Compile Include="Assets\Scripts\PlayerCompanion2D.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\SmoothCameraFollow.cs" />
-    <Compile Include="Assets\Scripts\State.cs" />
-    <Compile Include="Assets\Scripts\Tree.cs" />
-    <Compile Include="Assets\Scripts\UCT.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Note about Editor Folder.txt" />
