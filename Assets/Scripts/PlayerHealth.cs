@@ -17,7 +17,6 @@ public class PlayerHealth : MonoBehaviour {
 
     private Animator anim;
  
-	// Use this for initialization
 	void Start ()
     {
         abilityToMove = GetComponent<PlayerMovement>();
@@ -30,7 +29,11 @@ public class PlayerHealth : MonoBehaviour {
         health -= damage;
     }
 
-    // Update is called once per frame
+    public void GainHealth(int amount)
+    {
+        health += amount;
+    }
+
     void Update ()
     {
         CheckStatus();
@@ -53,7 +56,12 @@ public class PlayerHealth : MonoBehaviour {
         {
             playerStatusText.text = "Player Status: Normal";
             abilityToMove.enabled = true;
-            //dplayerDetectCollider.enabled = true;
+            //playerDetectCollider.enabled = true;
+        }
+
+        if (health > 100)
+        {
+            health = 100;
         }
     }
 }

@@ -8,7 +8,7 @@ public class CrateDrops : MonoBehaviour {
 
     public Sprite [] crateSprites;
 
-    public int health = 3;
+    public int health = 30;
 
     private int dropRNGValue;
 
@@ -35,12 +35,12 @@ public class CrateDrops : MonoBehaviour {
 
     void Update()
     {
-        if(health == 2)
+        if(health == 20)
         {
             sr.sprite = crateSprites[0];
         }
 
-        if(health == 1)
+        if(health == 10)
         {
             sr.sprite = crateSprites[1];
         }

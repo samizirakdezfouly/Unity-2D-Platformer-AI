@@ -27,6 +27,12 @@ public class PlayerMovement : MonoBehaviour {
 
     private bool jump;
 
+    private bool closeRange = false;
+
+    private bool longRange = false;
+
+    public GameObject weapon;
+
     [SerializeField]
     private bool airControl;
 
@@ -44,7 +50,17 @@ public class PlayerMovement : MonoBehaviour {
         HandleInput();
     }
 
-	void FixedUpdate ()
+    private void LateUpdate()
+    {
+        if(closeRange)
+            weapon.SetActive(true);
+        else
+        {
+            weapon.SetActive(false);
+        }
+    }
+
+    void FixedUpdate ()
     {
 
         float horizontal = Input.GetAxis("Horizontal");
@@ -72,11 +88,15 @@ public class PlayerMovement : MonoBehaviour {
 
         if(!this.playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && (isGrounded || airControl))
         {
+            closeRange = false;
+            longRange = false;
             playerRigidbody.velocity = new Vector2(horizontal * movementSpeed, playerRigidbody.velocity.y);
         }
 
         if(isGrounded && jump)
         {
+            closeRange = false;
+            longRange = false;
             isGrounded = false;
             playerRigidbody.AddForce(new Vector2(0, jumpForce));
             playerAnimator.SetBool("jump", true);
@@ -105,6 +125,7 @@ public class PlayerMovement : MonoBehaviour {
         if(attacking && !this.playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
             playerAnimator.SetTrigger("meleeAttack");
+            closeRange = true;
             //playerRigidbody.velocity = Vector2.zero;
         }
     }
@@ -115,7 +136,6 @@ public class PlayerMovement : MonoBehaviour {
         {
             attacking = true;
         }
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             jump = true;
@@ -133,7 +153,7 @@ public class PlayerMovement : MonoBehaviour {
                 for(int i = 0; i< colliders.Length; i++)
                 {
                     if(colliders[i].gameObject != gameObject)
-                    {
+                    {                      
                         playerAnimator.SetBool("jump", false);
                         playerAnimator.SetBool("land", false);
                         return true;
