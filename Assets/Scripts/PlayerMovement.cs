@@ -8,6 +8,10 @@ public class PlayerMovement : MonoBehaviour {
 
     private Animator playerAnimator;
 
+    private float attackCoolDown = 0.2f;
+
+    public Collider2D attackTrigger;
+
     [SerializeField]
     private Transform[] groundPoints;
     [SerializeField]
@@ -21,7 +25,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private bool facingDefault;
 
-    private bool attacking;
+    public bool attacking = false;
 
     private bool isGrounded;
 
@@ -30,8 +34,6 @@ public class PlayerMovement : MonoBehaviour {
     private bool closeRange = false;
 
     private bool longRange = false;
-
-    public GameObject weapon;
 
     [SerializeField]
     private bool airControl;
@@ -42,22 +44,13 @@ public class PlayerMovement : MonoBehaviour {
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
-	}
+        attackTrigger.enabled = false;
+    }
 	
 	
     void Update()
     {
         HandleInput();
-    }
-
-    private void LateUpdate()
-    {
-        if(closeRange)
-            weapon.SetActive(true);
-        else
-        {
-            weapon.SetActive(false);
-        }
     }
 
     void FixedUpdate ()
@@ -86,7 +79,8 @@ public class PlayerMovement : MonoBehaviour {
             playerAnimator.SetBool("land", true);
         }
 
-        if(!this.playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && (isGrounded || airControl))
+        //if(!this.playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && (isGrounded || airControl))
+        if(isGrounded || airControl)
         {
             closeRange = false;
             longRange = false;
@@ -122,12 +116,21 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Attacks()
     {
-        if(attacking && !this.playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        if (attacking && isGrounded)
         {
-            playerAnimator.SetTrigger("meleeAttack");
-            closeRange = true;
-            //playerRigidbody.velocity = Vector2.zero;
+            playerAnimator.SetBool("meleeAttack", true);
+            attackTrigger.enabled = true;
+
+            StartCoroutine(DelayMelee(attackCoolDown));                
         }
+    }
+
+    IEnumerator DelayMelee(float delayTime)
+    {
+        yield return null;
+        yield return new WaitForSeconds(delayTime);
+        attackTrigger.enabled = false;
+        playerAnimator.SetBool("meleeAttack", false);
     }
 
     private void HandleInput()

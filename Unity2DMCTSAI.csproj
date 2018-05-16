@@ -298,6 +298,7 @@
     <Compile Include="Assets\Scripts\FollowPath.cs" />
     <Compile Include="Assets\Scripts\Gun2D.cs" />
     <Compile Include="Assets\Scripts\IgnoreCollider.cs" />
+    <Compile Include="Assets\Scripts\MeleeTrigger.cs" />
     <Compile Include="Assets\Scripts\PickUpHealth.cs" />
     <Compile Include="Assets\Scripts\PlayerCompanion2D.cs" />
     <Compile Include="Assets\Scripts\PlayerHealth.cs" />
