@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameWorld  {
+public class GameWorld : MonoBehaviour {
+
+    public Cover detectedCover;
 
     public List<CompanionStates> possibleStates;
 

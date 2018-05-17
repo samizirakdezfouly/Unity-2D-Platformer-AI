@@ -4,53 +4,82 @@ using UnityEngine;
 
 public class Companion : MonoBehaviour {
 
+    public GameWorld gameWorld;
+
+    public PlayerCompanion2D companion2D;
+
     private float raycastOriginOffset = 0.5f;
 
-    public Transform xStart, xEnd, backXStart, backXEnd, yStart, yEnd;
+    public Transform xStart, xEnd;
 
     private int frontSensorDetectables;
 
-    private int backSensorDetectables;
+    public GameObject pickedUpHealth;
 
-    private int overheadSensorDetecables;
+    private bool isCarryingObj = false;
 	
 	void Start ()
     {
         frontSensorDetectables = LayerMask.GetMask("Enemy","Cover", "Scavengable Object");
-        backSensorDetectables = LayerMask.GetMask("Enemy");
-        overheadSensorDetecables = LayerMask.GetMask("Enemy");
     }
 	
     public void RaycastCheck()
     {
         RaycastHit2D frontRaycast = Physics2D.Linecast(xStart.position, xEnd.position,frontSensorDetectables);
-        RaycastHit2D backRaycast = Physics2D.Linecast(backXStart.position, backXEnd.position,backSensorDetectables);
-        RaycastHit2D overheadRaycast = Physics2D.Linecast(yStart.position, yEnd.position, overheadSensorDetecables);
 
-        if (frontRaycast | backRaycast | overheadRaycast)
+        if (frontRaycast)
         {
             if (frontRaycast.collider != null)
             {
-                Debug.DrawLine(xStart.position, xEnd.position, Color.green);
-                Debug.Log("Companion Has Detected Ahead Of Itself: " + frontRaycast.collider.name);
-            }
+                if(frontRaycast.collider.name == "Crate")
+                {
+                    gameWorld.detectedCover = new Cover(frontRaycast.collider.gameObject, frontRaycast.transform.position);
 
-            if (backRaycast.collider != null)
-            {
-                Debug.DrawLine(backXStart.position, backXEnd.position, Color.green);
-                Debug.Log("Companion Has Detected Behind Itself: " + backRaycast.collider.name);
-            }
+                    if (gameWorld.detectedCover != null)
+                    {       
+                        companion2D.enabled = false;
 
-            if (overheadRaycast.collider != null)
-            {
-                Debug.DrawLine(yStart.position, yEnd.position, Color.green);
-                Debug.Log("Companion Has Detected " + overheadRaycast.collider.name + " Above Itself");
+                        Vector2 cover = new Vector2(frontRaycast.transform.position.x - 1, transform.position.y);
+
+                        transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), cover, 3 * Time.deltaTime);
+                   }
+                    
+                    Debug.DrawLine(xStart.position, xEnd.position, Color.green);
+                    Debug.Log("Companion Has Detected Ahead Of Itself: " + frontRaycast.collider.name);
+                }               
+
+                if(frontRaycast.collider.name == "Zombie")
+                {
+                    Debug.DrawLine(xStart.position, xEnd.position, Color.green);
+                    Debug.Log("Companion Has Detected Ahead Of Itself: " + frontRaycast.collider.name);
+                }
+                
+                if(frontRaycast.collider.name == "Health Pack")
+                {
+                    if(!frontRaycast.collider.transform.IsChildOf(gameObject.transform))
+                        companion2D.enabled = false;
+                    else if (frontRaycast.collider.transform.IsChildOf(gameObject.transform))
+                        companion2D.enabled = true;
+
+                    Vector2 collectableObj = new Vector2(frontRaycast.transform.position.x, transform.position.y);
+
+                    if(!frontRaycast.collider.transform.IsChildOf(gameObject.transform))
+                        transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), collectableObj, 3 * Time.deltaTime);
+
+                    Debug.DrawLine(xStart.position, xEnd.position, Color.green);
+                    Debug.Log("Companion Has Detected Ahead Of Itself: " + frontRaycast.collider.name);
+                }
+                
             }
         }
 
+        companion2D.enabled = true;
+
     }
 
-	void FixedUpdate ()
+
+
+    void FixedUpdate ()
     {
         RaycastCheck();
 	}

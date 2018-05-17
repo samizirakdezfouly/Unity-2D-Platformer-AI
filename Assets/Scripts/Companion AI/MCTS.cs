@@ -90,6 +90,7 @@ public class MCTS : MonoBehaviour {
         while (tempNode != null)
         {
             tempNode.GetState().IncreaseVisit();
+
         }
     }
 

@@ -6,6 +6,8 @@ public class PickUpHealth : MonoBehaviour {
 
     public int healthValue;
 
+    public Collider2D trigger;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player")
@@ -13,5 +15,14 @@ public class PickUpHealth : MonoBehaviour {
             collision.SendMessage("GainHealth", healthValue);
             Destroy(gameObject);
         }
+
+        if(collision.tag == "Companion")
+        {
+            gameObject.transform.parent = collision.gameObject.transform;
+            //trigger.enabled = false;
+        }
     }
+
+
+
 }
