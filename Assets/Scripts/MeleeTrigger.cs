@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class MeleeTrigger : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public int damage;
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Enemies" || collision.tag == "Destructable")
+        {
+            collision.SendMessage("TakeDamage", damage);
+        }
+    }
+
 }

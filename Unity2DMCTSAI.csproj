@@ -284,23 +284,22 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\AmmoPickup.cs" />
     <Compile Include="Assets\Scripts\Bullet2D.cs" />
+    <Compile Include="Assets\Scripts\Companion AI\Companion.cs" />
     <Compile Include="Assets\Scripts\Companion AI\GameWorld.cs" />
     <Compile Include="Assets\Scripts\Companion AI\MCTS.cs" />
     <Compile Include="Assets\Scripts\Companion AI\Node.cs" />
+    <Compile Include="Assets\Scripts\Companion AI\PlayerCompanion2D.cs" />
     <Compile Include="Assets\Scripts\Companion AI\State.cs" />
     <Compile Include="Assets\Scripts\Companion AI\Tree.cs" />
     <Compile Include="Assets\Scripts\Companion AI\UCT.cs" />
-    <Compile Include="Assets\Scripts\Companion.cs" />
-    <Compile Include="Assets\Scripts\CompanionMovement.cs" />
     <Compile Include="Assets\Scripts\CrateDrops.cs" />
     <Compile Include="Assets\Scripts\EnemyDamage.cs" />
+    <Compile Include="Assets\Scripts\EnemyHealth.cs" />
     <Compile Include="Assets\Scripts\EnemyMovement.cs" />
-    <Compile Include="Assets\Scripts\FollowPath.cs" />
     <Compile Include="Assets\Scripts\Gun2D.cs" />
     <Compile Include="Assets\Scripts\IgnoreCollider.cs" />
     <Compile Include="Assets\Scripts\MeleeTrigger.cs" />
     <Compile Include="Assets\Scripts\PickUpHealth.cs" />
-    <Compile Include="Assets\Scripts\PlayerCompanion2D.cs" />
     <Compile Include="Assets\Scripts\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\SmoothCameraFollow.cs" />

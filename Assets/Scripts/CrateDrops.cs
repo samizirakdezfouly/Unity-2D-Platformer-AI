@@ -16,7 +16,6 @@ public class CrateDrops : MonoBehaviour {
 
     private SpriteRenderer sr;
 
-    // Use this for initialization
     void Start ()
     {
         dropRNGValue = possibleDrops.Length;

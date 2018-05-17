@@ -4,17 +4,38 @@ using UnityEngine;
 
 public class SwapWeapons : MonoBehaviour {
 
-    public GameObject[] invSlots = new GameObject [2];
+    public int selectedWeapon = 0;
 
-	// Use this for initialization
 	void Start ()
     {
-	    	
+        SelectWeapon();	
 	}
 	
-	// Update is called once per frame
 	void Update ()
     {
-	    	
-	}
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            selectedWeapon = 0;
+            SelectWeapon();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            selectedWeapon = 1;
+            SelectWeapon();
+        }
+    }
+
+    void SelectWeapon()
+    {
+        int i = 0;
+        foreach (Transform weapon in transform)
+        {
+            if (i == selectedWeapon)
+                weapon.gameObject.SetActive(true);
+            else
+                weapon.gameObject.SetActive(false);
+            i++;
+        }
+    }
 }
