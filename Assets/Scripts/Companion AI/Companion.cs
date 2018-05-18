@@ -16,10 +16,6 @@ public class Companion : MonoBehaviour {
 
     public GameObject pickedUpHealth;
 
-    /// <summary>
-    /// 
-    /// </summary>
-
     public GameObject bulletToFire;
 
     public Transform bulletSpawnLocation;
@@ -93,7 +89,6 @@ public class Companion : MonoBehaviour {
         }
 
         companion2D.enabled = true;
-
     }
 
     IEnumerator FiringRate(float interval)
