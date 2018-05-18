@@ -4,17 +4,11 @@ using UnityEngine;
 
 public class Bullet2D : MonoBehaviour {
 
-    private float bulletSpeed = 7.0f;
+    public float bulletSpeed = 400.0f;
 
-    private float bulletDeathTime = 1.5f;
+    public float bulletDeathTime = 1.5f;
 
     public int bulletDamage;
-
-    public string tagToDamage;
-
-    public string playerTag;
-
-    public string cantShootTag;
 
     private Rigidbody2D bullet;
 
@@ -38,13 +32,11 @@ public class Bullet2D : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(tagToDamage))
+        if (collision.tag == "Enemies")
         {
             collision.SendMessage("TakeDamage", bulletDamage);
-        }
-
-        if (collision.tag != playerTag && collision.tag != cantShootTag)
             Destroy(gameObject);
+        }
     }
 
 
@@ -52,9 +44,9 @@ public class Bullet2D : MonoBehaviour {
     {
         bullet.velocity = transform.forward * bulletSpeed;
 
-        if (Gun2D.isFlipped == true)
+        //if (Gun2D.isFlipped == true)
             bullet.AddForce(new Vector2(-bulletSpeed, 0));
-        else if (Gun2D.isFlipped == false)
-            bullet.AddForce(new Vector2(bulletSpeed, 0));
+        //else if (Gun2D.isFlipped == false)
+            //bullet.AddForce(new Vector2(bulletSpeed, 0));
     }
 }

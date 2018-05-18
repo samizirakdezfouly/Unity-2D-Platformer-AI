@@ -16,9 +16,19 @@ public class Companion : MonoBehaviour {
 
     public GameObject pickedUpHealth;
 
-    private bool isCarryingObj = false;
-	
-	void Start ()
+    /// <summary>
+    /// 
+    /// </summary>
+
+    public GameObject bulletToFire;
+
+    public Transform bulletSpawnLocation;
+
+    public Vector2 bulletSpawnRotation;
+
+    private bool canFire = true;
+
+    void Start ()
     {
         frontSensorDetectables = LayerMask.GetMask("Enemy","Cover", "Scavengable Object");
     }
@@ -43,18 +53,28 @@ public class Companion : MonoBehaviour {
 
                         transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), cover, 3 * Time.deltaTime);
                    }
-                    
-                    Debug.DrawLine(xStart.position, xEnd.position, Color.green);
-                    Debug.Log("Companion Has Detected Ahead Of Itself: " + frontRaycast.collider.name);
                 }               
 
                 if(frontRaycast.collider.name == "Zombie")
                 {
-                    Debug.DrawLine(xStart.position, xEnd.position, Color.green);
-                    Debug.Log("Companion Has Detected Ahead Of Itself: " + frontRaycast.collider.name);
+                    companion2D.enabled = false;
+
+                    Vector2 enemy = new Vector2(frontRaycast.transform.position.x + 3, transform.position.y);
+
+                    transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), enemy, 3 * Time.deltaTime);
+
+                    if(canFire)
+                    {
+                        canFire = false;
+
+                        Instantiate(bulletToFire, bulletSpawnLocation.position, Quaternion.Euler(bulletSpawnRotation));
+
+                        StartCoroutine(FiringRate(0.5f));
+
+                    }
                 }
                 
-                if(frontRaycast.collider.name == "Health Pack")
+                if(frontRaycast.collider.name == "Health Pack" || frontRaycast.collider.name == "Health Pack(Clone)")
                 {
                     if(!frontRaycast.collider.transform.IsChildOf(gameObject.transform))
                         companion2D.enabled = false;
@@ -64,20 +84,24 @@ public class Companion : MonoBehaviour {
                     Vector2 collectableObj = new Vector2(frontRaycast.transform.position.x, transform.position.y);
 
                     if(!frontRaycast.collider.transform.IsChildOf(gameObject.transform))
-                        transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), collectableObj, 3 * Time.deltaTime);
-
-                    Debug.DrawLine(xStart.position, xEnd.position, Color.green);
-                    Debug.Log("Companion Has Detected Ahead Of Itself: " + frontRaycast.collider.name);
+                        transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), collectableObj, 3 * Time.deltaTime);;
                 }
                 
             }
+            Debug.DrawLine(xStart.position, xEnd.position, Color.green);
+            Debug.Log("Companion Has Detected Ahead Of Itself: " + frontRaycast.collider.name);
         }
 
         companion2D.enabled = true;
 
     }
 
-
+    IEnumerator FiringRate(float interval)
+    {
+        Debug.Log("Help");
+        yield return new WaitForSeconds(interval);
+        canFire = true;
+    }
 
     void FixedUpdate ()
     {
