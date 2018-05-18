@@ -284,12 +284,18 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\AmmoPickup.cs" />
     <Compile Include="Assets\Scripts\Bullet2D.cs" />
-    <Compile Include="Assets\Scripts\Companion AI\Companion.cs" />
+    <Compile Include="Assets\Scripts\Companion AI\CompanionBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Companion AI\CompanionSensor.cs" />
     <Compile Include="Assets\Scripts\Companion AI\Cover.cs" />
+    <Compile Include="Assets\Scripts\Companion AI\DefensiveState.cs" />
+    <Compile Include="Assets\Scripts\Companion AI\EngageEnemyState.cs" />
+    <Compile Include="Assets\Scripts\Companion AI\FollowPlayerState.cs" />
     <Compile Include="Assets\Scripts\Companion AI\GameWorld.cs" />
+    <Compile Include="Assets\Scripts\Companion AI\ICompanionStates.cs" />
     <Compile Include="Assets\Scripts\Companion AI\MCTS.cs" />
     <Compile Include="Assets\Scripts\Companion AI\Node.cs" />
     <Compile Include="Assets\Scripts\Companion AI\PlayerCompanion2D.cs" />
+    <Compile Include="Assets\Scripts\Companion AI\ScavangeState.cs" />
     <Compile Include="Assets\Scripts\Companion AI\ScavObject.cs" />
     <Compile Include="Assets\Scripts\Companion AI\State.cs" />
     <Compile Include="Assets\Scripts\Companion AI\Tree.cs" />
