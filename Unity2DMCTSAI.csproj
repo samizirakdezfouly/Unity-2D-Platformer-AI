@@ -294,9 +294,7 @@
     <Compile Include="Assets\Scripts\Companion AI\ICompanionStates.cs" />
     <Compile Include="Assets\Scripts\Companion AI\MCTS.cs" />
     <Compile Include="Assets\Scripts\Companion AI\Node.cs" />
-    <Compile Include="Assets\Scripts\Companion AI\PlayerCompanion2D.cs" />
     <Compile Include="Assets\Scripts\Companion AI\ScavangeState.cs" />
-    <Compile Include="Assets\Scripts\Companion AI\ScavObject.cs" />
     <Compile Include="Assets\Scripts\Companion AI\State.cs" />
     <Compile Include="Assets\Scripts\Companion AI\Tree.cs" />
     <Compile Include="Assets\Scripts\Companion AI\UCT.cs" />

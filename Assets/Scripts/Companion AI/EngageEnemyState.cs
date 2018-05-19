@@ -16,15 +16,36 @@ public class EngageEnemyState : ICompanionStates {
     public void ExecuteState()
     {
         Debug.Log("Companion Is Engaging An Enemy");
+
+        companion.EngageEnemy();
+
+        switch (RaycastCheck2D(sensor.frontRaycast))
+        {
+            case null:
+                companion.ChangeCompanionState(new FollowPlayerState());
+                break;
+            case "Health Pack":
+                companion.ChangeCompanionState(new ScavangeState());
+                break;
+            case "Health Pack(Clone)":
+                companion.ChangeCompanionState(new ScavangeState());
+                break;
+            case "Crate":
+                companion.ChangeCompanionState(new DefensiveState());
+                break;
+        }
     }
 
     public void OnStateExit()
     {
-        throw new System.NotImplementedException();
+        return;
     }
 
     public string RaycastCheck2D(RaycastHit2D raycast)
     {
-        throw new System.NotImplementedException();
+        if (raycast)
+            return raycast.collider.name;
+        else
+            return null;
     }
 }
