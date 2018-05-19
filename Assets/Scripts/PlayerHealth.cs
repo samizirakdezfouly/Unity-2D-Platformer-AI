@@ -47,7 +47,6 @@ public class PlayerHealth : MonoBehaviour {
         {
             health = 0;
             abilityToMove.enabled = false;
-            //playerDetectCollider.enabled = false;
             playerStatusText.text = "Player Status: Needs Assistance";
             anim.SetBool("disabled", true);
         }
@@ -56,7 +55,7 @@ public class PlayerHealth : MonoBehaviour {
         {
             playerStatusText.text = "Player Status: Normal";
             abilityToMove.enabled = true;
-            //playerDetectCollider.enabled = true;
+            anim.SetBool("disabled", false);
         }
 
         if (health > 100)

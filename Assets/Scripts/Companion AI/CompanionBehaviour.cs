@@ -40,6 +40,8 @@ public class CompanionBehaviour : MonoBehaviour {
 
     private bool canFire = true;
 
+    public bool isScaled = false;
+
     ///
 
     private ICompanionStates currentCompanionState;
@@ -148,7 +150,7 @@ public class CompanionBehaviour : MonoBehaviour {
 
             companionStatus.text = "Companion Status: Engaging Enemy";
 
-            Vector2 enemy = new Vector2(companionSensor.frontRaycast.transform.position.x + 3, transform.position.y);
+            Vector2 enemy = new Vector2(companionSensor.frontRaycast.transform.position.x + -4, transform.position.y);
 
             transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), enemy, 3 * Time.deltaTime);
 
@@ -159,6 +161,15 @@ public class CompanionBehaviour : MonoBehaviour {
                 ammo--;
 
                 ammoCountUI.text = "Ammo: " + ammo;
+
+                if(gameObject.transform.localScale.x == 0.5)
+                {
+                    isScaled = true;
+                }
+                else if (gameObject.transform.localScale.x == -0.5)
+                {
+                    isScaled = false;
+                }
 
                 Instantiate(bulletToFire, bulletSpawnLocation.position, Quaternion.Euler(bulletSpawnRotation));
 
@@ -184,7 +195,6 @@ public class CompanionBehaviour : MonoBehaviour {
 
     IEnumerator FiringRate(float interval)
     {
-        Debug.Log("Help");
         yield return new WaitForSeconds(interval);
         canFire = true;
     }

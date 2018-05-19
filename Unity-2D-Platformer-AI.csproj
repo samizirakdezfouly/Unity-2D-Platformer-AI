@@ -309,6 +309,7 @@
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\SandboxManager.cs" />
     <Compile Include="Assets\Scripts\SmoothCameraFollow.cs" />
+    <Compile Include="Assets\Scripts\SoundManager.cs" />
     <Compile Include="Assets\Scripts\SwapWeapons.cs" />
   </ItemGroup>
   <ItemGroup>

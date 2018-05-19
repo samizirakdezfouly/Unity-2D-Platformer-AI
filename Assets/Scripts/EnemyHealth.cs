@@ -36,6 +36,18 @@ public class EnemyHealth : MonoBehaviour {
         }
     }
 
+    public void TakeCompanionDamage(int damage)
+    {
+        this.health -= damage;
+
+        //isStunned = true;
+
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Update()
     {
         if (isStunned)

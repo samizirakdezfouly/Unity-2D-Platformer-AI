@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Bullet2D : MonoBehaviour {
 
-    public float bulletSpeed = 400.0f;
+    public CompanionBehaviour companion;
+
+    public float bulletSpeed = 50.0f;
 
     public float bulletDeathTime = 1.5f;
 
@@ -34,19 +36,26 @@ public class Bullet2D : MonoBehaviour {
     {
         if (collision.tag == "Enemies")
         {
-            collision.SendMessage("TakeDamage", bulletDamage);
+            collision.SendMessage("TakeCompanionDamage", bulletDamage);
             Destroy(gameObject);
         }
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
-        bullet.velocity = transform.forward * bulletSpeed;
+        //bullet.velocity = transform.right * bulletSpeed;
 
-        //if (Gun2D.isFlipped == true)
-            bullet.AddForce(new Vector2(-bulletSpeed, 0));
-        //else if (Gun2D.isFlipped == false)
-            //bullet.AddForce(new Vector2(bulletSpeed, 0));
+        switch (companion.isScaled)
+        {
+            case true:
+                //bullet.AddForce(new Vector2(bulletSpeed, 0));
+                //bullet.velocity = Vector2.left * bulletSpeed;
+                break;
+            case false:
+                //bullet.AddForce(new Vector2(bulletSpeed, 0));
+                bullet.velocity = Vector2.right * bulletSpeed;
+                break;
+        }
     }
 }
