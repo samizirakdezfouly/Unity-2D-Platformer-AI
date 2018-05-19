@@ -311,6 +311,11 @@
     <Compile Include="Assets\Scripts\SmoothCameraFollow.cs" />
     <Compile Include="Assets\Scripts\SoundManager.cs" />
     <Compile Include="Assets\Scripts\SwapWeapons.cs" />
+    <Compile Include="Assets\Scripts\Zombie AI\EnagagePlayerState.cs" />
+    <Compile Include="Assets\Scripts\Zombie AI\EnemyBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Zombie AI\EnemySensor.cs" />
+    <Compile Include="Assets\Scripts\Zombie AI\IEnemyStates.cs" />
+    <Compile Include="Assets\Scripts\Zombie AI\PatrolState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Note about Editor Folder.txt" />
