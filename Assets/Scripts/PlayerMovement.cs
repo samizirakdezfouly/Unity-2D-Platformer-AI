@@ -31,10 +31,6 @@ public class PlayerMovement : MonoBehaviour {
 
     private bool jump;
 
-    private bool closeRange = false;
-
-    private bool longRange = false;
-
     [SerializeField]
     private bool airControl;
 
@@ -79,21 +75,24 @@ public class PlayerMovement : MonoBehaviour {
             playerAnimator.SetBool("land", true);
         }
 
-        //if(!this.playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && (isGrounded || airControl))
         if(isGrounded || airControl)
         {
-            closeRange = false;
-            longRange = false;
+            if (isGrounded && playerRigidbody.velocity.x > 0.3 || isGrounded && playerRigidbody.velocity.x < -0.3)
+            {
+                SoundManager.PlaySound("PlayerRun");
+                //StartCoroutine(Delay(1.0f));
+            }
+                
+
             playerRigidbody.velocity = new Vector2(horizontal * movementSpeed, playerRigidbody.velocity.y);
         }
 
         if(isGrounded && jump)
         {
-            closeRange = false;
-            longRange = false;
             isGrounded = false;
             playerRigidbody.AddForce(new Vector2(0, jumpForce));
             playerAnimator.SetBool("jump", true);
+            SoundManager.PlaySound("PlayerJump");
         }
 
         playerAnimator.SetFloat("speed", Mathf.Abs(horizontal));
@@ -172,6 +171,11 @@ public class PlayerMovement : MonoBehaviour {
     {
         attacking = false;
         jump = false;
+    }
+
+    IEnumerator Delay(float time)
+    {
+        yield return new WaitForSeconds(time);
     }
 
 }
