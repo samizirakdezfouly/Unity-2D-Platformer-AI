@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CompanionBehaviour : MonoBehaviour {
 
@@ -31,12 +32,19 @@ public class CompanionBehaviour : MonoBehaviour {
 
     public Vector2 bulletSpawnRotation;
 
+    public int ammo;
+
+    public Text ammoCountUI;
+
+    public Text companionStatus;
+
     private bool canFire = true;
 
     ///
 
     private ICompanionStates currentCompanionState;
     private CompanionSensor companionSensor;
+    public bool shouldChangeState = true;
 
     void Start ()
     {
@@ -60,10 +68,14 @@ public class CompanionBehaviour : MonoBehaviour {
         currentCompanionState.OnStateEnter(this,companionSensor);
     }
 
+
+
     public void FollowPlayer()
     {
         if (player)
         {
+            companionStatus.text = "Companion Status: Following Player";
+
             DetectFlip();
 
             Vector3 pos = transform.position;
@@ -82,25 +94,27 @@ public class CompanionBehaviour : MonoBehaviour {
     {
         if(companionSensor.frontRaycast.collider != null)
         {
-                companionWeapon.SetActive(false);
+            companionStatus.text = "Companion Status: Scavanging";
 
-                Vector2 collectableObj = new Vector2(companionSensor.frontRaycast.transform.position.x, transform.position.y);
+            companionWeapon.SetActive(false);
 
-                if (!companionSensor.frontRaycast.collider.transform.IsChildOf(gameObject.transform))
-                    transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), collectableObj, 3 * Time.deltaTime);
+            Vector2 collectableObj = new Vector2(companionSensor.frontRaycast.transform.position.x, transform.position.y);
 
-                if (companionSensor.frontRaycast.collider.transform.IsChildOf(gameObject.transform))
+            if (!companionSensor.frontRaycast.collider.transform.IsChildOf(gameObject.transform))
+                transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), collectableObj, 3 * Time.deltaTime);
+
+            if (companionSensor.frontRaycast.collider.transform.IsChildOf(gameObject.transform))
+            {
+                if (!isFlipped)
                 {
-                    if (!isFlipped)
-                    {
-                        FlipReversed();
-                        isFlipped = true;
-                    }
-
-                    Vector2 playerLocation = new Vector2(player.transform.position.x, transform.position.y);
-
-                    transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), playerLocation, 3 * Time.deltaTime);
+                   FlipReversed();
+                   isFlipped = true;
                 }
+
+                Vector2 playerLocation = new Vector2(player.transform.position.x, transform.position.y);
+
+                transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), playerLocation, 3 * Time.deltaTime);
+            }
         }
         else
         {
@@ -114,6 +128,8 @@ public class CompanionBehaviour : MonoBehaviour {
     {
         if (companionSensor.frontRaycast.collider != null)
         {
+            companionStatus.text = "Companion Status: Behind Cover";
+
             Vector2 cover = new Vector2(companionSensor.frontRaycast.transform.position.x - 1, transform.position.y);
 
             transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), cover, 3 * Time.deltaTime);
@@ -126,8 +142,12 @@ public class CompanionBehaviour : MonoBehaviour {
 
     public void EngageEnemy()
     {
-        if (companionSensor.frontRaycast.collider != null)
+        if (companionSensor.frontRaycast.collider != null && ammo > 0)
         {
+            shouldChangeState = true;
+
+            companionStatus.text = "Companion Status: Engaging Enemy";
+
             Vector2 enemy = new Vector2(companionSensor.frontRaycast.transform.position.x + 3, transform.position.y);
 
             transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), enemy, 3 * Time.deltaTime);
@@ -136,6 +156,10 @@ public class CompanionBehaviour : MonoBehaviour {
             {
                 canFire = false;
 
+                ammo--;
+
+                ammoCountUI.text = "Ammo: " + ammo;
+
                 Instantiate(bulletToFire, bulletSpawnLocation.position, Quaternion.Euler(bulletSpawnRotation));
 
                 StartCoroutine(FiringRate(0.5f));
@@ -143,8 +167,19 @@ public class CompanionBehaviour : MonoBehaviour {
         }
         else
         {
-            ChangeCompanionState(new FollowPlayerState());
+            if (shouldChangeState)
+            {
+                shouldChangeState = false;
+                ChangeCompanionState(new FollowPlayerState());
+            }
         }
+    }
+
+
+    public void PickUpAmmo(int amount)
+    {
+        ammo += amount;
+        ammoCountUI.text = "Ammo: " + ammo;
     }
 
     IEnumerator FiringRate(float interval)

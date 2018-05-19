@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity-2D-Platformer-AI", "Unity-2D-Platformer-AI.csproj", "{A07E94D6-7249-4F51-AAEA-F6AF0349A911}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A07E94D6-7249-4F51-AAEA-F6AF0349A911}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A07E94D6-7249-4F51-AAEA-F6AF0349A911}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A07E94D6-7249-4F51-AAEA-F6AF0349A911}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A07E94D6-7249-4F51-AAEA-F6AF0349A911}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -8,7 +8,7 @@ public class AmmoPickup : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.tag == "Companion")
         {
             collision.SendMessage("PickUpAmmo", ammoValue);
             Destroy(gameObject);

@@ -30,6 +30,12 @@ public class EngageEnemyState : ICompanionStates {
             case "Health Pack(Clone)":
                 companion.ChangeCompanionState(new ScavangeState());
                 break;
+            case "Ammo Pack":
+                companion.ChangeCompanionState(new ScavangeState());
+                break;
+            case "Ammo Pack(Clone)":
+                companion.ChangeCompanionState(new ScavangeState());
+                break;
             case "Crate":
                 companion.ChangeCompanionState(new DefensiveState());
                 break;
