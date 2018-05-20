@@ -18,10 +18,15 @@ public class EnemyHealth : MonoBehaviour {
 
     private bool isStunned;
 
+    private EnemyBehaviour behaviour;
+
+    private EnemySensor sensor;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();    
+        rb = GetComponent<Rigidbody2D>();
+        behaviour = GetComponent<EnemyBehaviour>();
+        sensor = GetComponent<EnemySensor>();
     }
 
     public void TakeDamage(int damage)
@@ -30,19 +35,10 @@ public class EnemyHealth : MonoBehaviour {
 
         isStunned = true;
 
+        if (!sensor.playerDetection)
+            behaviour.ChangeDirection();
+
         if(health <= 0)
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    public void TakeCompanionDamage(int damage)
-    {
-        this.health -= damage;
-
-        //isStunned = true;
-
-        if (health <= 0)
         {
             Destroy(gameObject);
         }
@@ -61,7 +57,6 @@ public class EnemyHealth : MonoBehaviour {
                     sprite.color = Color.red;
                 }
 
-                rb.GetComponent<EnemyMovement>().enabled = false;
                 rb.AddForce(knockbackForce, ForceMode2D.Impulse);
             }
 
@@ -73,7 +68,6 @@ public class EnemyHealth : MonoBehaviour {
                 }
                 knockbackTimer = 0.0f;
                 isStunned = false;
-                rb.GetComponent<EnemyMovement>().enabled = true;
             }
         }
     }

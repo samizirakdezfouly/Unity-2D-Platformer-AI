@@ -4,38 +4,35 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour {
 
-    public float patrolSpeed;
-    //public float flipTime;
-    public float chargeBuildUp;
-    public float timer = 0.0f;
+    [Header("Player References")]
+    public PlayerHealth playerHealth;
+    public Rigidbody2D player;
+    public SpriteRenderer[] playerBody;
 
+    [Header("Patrol Settings")]
+    public float patrolSpeed;
+
+    [Header("Charge Settings")]
+    public Vector2 knockbackForce;
+    public float durationOfKnockback;
+    public float chargeBuildUp;
+    public float chargeSpeed;
     public int attackDamage;
 
-    public float chargeSpeed;
+    public int zombieNumber;
 
-    public PlayerHealth playerHealth;
+    private bool facingDefault;
 
-    public int health;
+    private float timer = 0.0f;
+    private float knockbackTimer = 0.0f;
 
     private Rigidbody2D enemyRb;
     private Animator enemyAnimator;
-    private float nextFlipChance = 0f;
-    private bool playerDisabled = false;
+
     private bool canChangeDirection = true;
-    private bool facingRight = false;
     private bool charging;
     private bool inFOV = false;
-    public static bool facingDefault;
-    private bool isStunned;
-
-    public Rigidbody2D player;
-
-    public Vector2 knockbackForce;
-    public SpriteRenderer[] playerBody;
-
-    public float durationOfKnockback;
-
-    private float knockbackTimer = 0.0f;
+    private bool isStunned;  
 
     private IEnemyStates currentEnemyState;
     private EnemySensor enemySensor;
@@ -48,30 +45,6 @@ public class EnemyBehaviour : MonoBehaviour {
         isStunned = false;
         ChangeEnemyState(new PatrolState());
 	}
-
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-
-        isStunned = true;
-
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    public void TakeCompanionDamage(int damage)
-    {
-        this.health -= damage;
-
-        //isStunned = true;
-
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
-    }
 
     void Update ()
     {
@@ -108,11 +81,6 @@ public class EnemyBehaviour : MonoBehaviour {
                 }
             }
         }
-
-        if (playerHealth.health == 0)
-        {
-            ChangeEnemyState(new PatrolState());
-        }
     }
 
     public void ChangeEnemyState(IEnemyStates newState)
@@ -129,8 +97,9 @@ public class EnemyBehaviour : MonoBehaviour {
 
     public void Patrol()
     {
-        if (!enemySensor.patrolDetection || enemySensor.patrolDetection.collider.name == "Crate")
+        if (enemySensor.patrolDetection == false || enemySensor.patrolDetection.collider.name == "Crate")
             ChangeDirection();
+       
 
         transform.Translate(GetDirection() * (patrolSpeed * Time.deltaTime));
     }
@@ -190,30 +159,6 @@ public class EnemyBehaviour : MonoBehaviour {
         }
     }
 
-    //public void KnockBackPlayer()
-    //{
-    //  if (knockbackTimer < durationOfKnockback && isStunned)
-    //        {
-    //            foreach (SpriteRenderer sprite in playerBody)
-    //            {
-    //                sprite.color = Color.red;
-    //            }
-
-    //            player.GetComponent<PlayerMovement>().enabled = false;
-    //            player.AddForce(knockbackForce, ForceMode2D.Impulse);
-    //        }
-    //        else
-    //        {
-    //            foreach (SpriteRenderer sprite in playerBody)
-    //            {
-    //                sprite.color = Color.white;
-    //            }
-    //            knockbackTimer = 0.0f;
-    //            isStunned = false;
-    //            player.GetComponent<PlayerMovement>().enabled = true;
-    //        }
-    //}
-
     public Vector2 GetDirection()
     {
         return facingDefault ? Vector2.right : Vector2.left;
@@ -223,12 +168,10 @@ public class EnemyBehaviour : MonoBehaviour {
     {
         if (!canChangeDirection)
             return;
-
         facingDefault = !facingDefault;
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
-        
     }
 
     public void ResetEnemy()

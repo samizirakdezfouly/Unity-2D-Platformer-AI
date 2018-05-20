@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class CompanionSensor : MonoBehaviour {
 
-    private float raycastOriginOffset = 0.5f;
-
     public Transform xStart, xEnd;
 
     private int frontSensorDetectables;

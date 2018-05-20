@@ -282,8 +282,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\AmmoPickup.cs" />
-    <Compile Include="Assets\Scripts\Bullet2D.cs" />
+    <Compile Include="Assets\Scripts\Companion AI\Bullet2D.cs" />
     <Compile Include="Assets\Scripts\Companion AI\CompanionBehaviour.cs" />
     <Compile Include="Assets\Scripts\Companion AI\CompanionSensor.cs" />
     <Compile Include="Assets\Scripts\Companion AI\Cover.cs" />
@@ -303,14 +302,15 @@
     <Compile Include="Assets\Scripts\EnemyHealth.cs" />
     <Compile Include="Assets\Scripts\EnemyMovement.cs" />
     <Compile Include="Assets\Scripts\IgnoreCollider.cs" />
-    <Compile Include="Assets\Scripts\MeleeTrigger.cs" />
-    <Compile Include="Assets\Scripts\PickUpHealth.cs" />
-    <Compile Include="Assets\Scripts\PlayerHealth.cs" />
-    <Compile Include="Assets\Scripts\PlayerMovement.cs" />
-    <Compile Include="Assets\Scripts\SandboxManager.cs" />
+    <Compile Include="Assets\Scripts\Manager Scripts\SandboxManager.cs" />
+    <Compile Include="Assets\Scripts\Manager Scripts\SoundManager.cs" />
+    <Compile Include="Assets\Scripts\Pick Up Scripts\AmmoPickup.cs" />
+    <Compile Include="Assets\Scripts\Pick Up Scripts\PickUpHealth.cs" />
+    <Compile Include="Assets\Scripts\Player Scripts\MeleeTrigger.cs" />
+    <Compile Include="Assets\Scripts\Player Scripts\PlayerHealth.cs" />
+    <Compile Include="Assets\Scripts\Player Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\Player Scripts\SwapWeapons.cs" />
     <Compile Include="Assets\Scripts\SmoothCameraFollow.cs" />
-    <Compile Include="Assets\Scripts\SoundManager.cs" />
-    <Compile Include="Assets\Scripts\SwapWeapons.cs" />
     <Compile Include="Assets\Scripts\Zombie AI\EnagagePlayerState.cs" />
     <Compile Include="Assets\Scripts\Zombie AI\EnemyBehaviour.cs" />
     <Compile Include="Assets\Scripts\Zombie AI\EnemySensor.cs" />

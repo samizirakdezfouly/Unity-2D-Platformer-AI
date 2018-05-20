@@ -164,11 +164,11 @@ public class CompanionBehaviour : MonoBehaviour {
 
                 if(gameObject.transform.localScale.x == 0.5)
                 {
-                    facingDefault = false;
+                    facingDefault = true;
                 }
                 else if (gameObject.transform.localScale.x == -0.5)
                 {
-                    facingDefault = true;
+                    facingDefault = false;
                 }
 
                 Instantiate(bulletToFire, bulletSpawnLocation.position, Quaternion.Euler(bulletSpawnRotation));
@@ -188,7 +188,7 @@ public class CompanionBehaviour : MonoBehaviour {
 
     public Vector2 GetDirection()
     {
-        return facingDefault ? Vector2.right : Vector2.left;
+        return facingDefault ? Vector2.left : Vector2.right;
     }
 
     public void PickUpAmmo(int amount)
@@ -229,13 +229,13 @@ public class CompanionBehaviour : MonoBehaviour {
 
         bool scaleChanged = false;
 
-        if(playerPosition.x > gameObject.transform.position.x && !scaleChanged)
+        if (playerPosition.x > gameObject.transform.position.x && !scaleChanged)
         {
             companionScale.x = -0.5f;
             scaleChanged = true;
         }
 
-        if(playerPosition.x < gameObject.transform.position.x && !scaleChanged)
+        if (playerPosition.x < gameObject.transform.position.x && !scaleChanged)
         {
             companionScale.x = 0.5f;
             scaleChanged = true;

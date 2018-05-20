@@ -17,7 +17,6 @@ public class EnemySensor : MonoBehaviour {
 
     public bool damagePlayerEnabled = false;
 
-
 	void Start ()
     {
         patrolSensorDetectables = LayerMask.GetMask("Cover", "Platforms");

@@ -15,11 +15,11 @@ public class EnagagePlayerState : IEnemyStates
 
     public void ExecuteState()
     {
-        Debug.Log("Enemy Is Engaging Player");
+        //Debug.Log("Enemy Is Engaging Player");
 
         enemy.EngageEnemy();
 
-        if (!RaycastCheck2D(sensor.playerDetection))
+        if (!RaycastCheck2D(sensor.playerDetection) || enemy.playerHealth.health <= 0)
             enemy.ChangeEnemyState(new PatrolState());
     }
 

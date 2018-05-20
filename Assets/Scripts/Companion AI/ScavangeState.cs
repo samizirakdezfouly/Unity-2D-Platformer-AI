@@ -44,6 +44,8 @@ public class ScavangeState : ICompanionStates {
 
     public void OnStateExit()
     {
+        if(companion.companionWeapon.activeInHierarchy == false)
+            companion.companionWeapon.SetActive(true);
         return;
     }
 
