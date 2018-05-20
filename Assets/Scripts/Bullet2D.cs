@@ -42,20 +42,11 @@ public class Bullet2D : MonoBehaviour {
     }
 
 
+
     void FixedUpdate()
     {
-        //bullet.velocity = transform.right * bulletSpeed;
+                bullet.AddForce(companion.GetDirection() * bulletSpeed);
+   
 
-        switch (companion.isScaled)
-        {
-            case true:
-                //bullet.AddForce(new Vector2(bulletSpeed, 0));
-                //bullet.velocity = Vector2.left * bulletSpeed;
-                break;
-            case false:
-                //bullet.AddForce(new Vector2(bulletSpeed, 0));
-                bullet.velocity = Vector2.right * bulletSpeed;
-                break;
-        }
     }
 }

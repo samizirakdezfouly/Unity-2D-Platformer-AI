@@ -16,15 +16,23 @@ public class EnagagePlayerState : IEnemyStates
     public void ExecuteState()
     {
         Debug.Log("Enemy Is Engaging Player");
+
+        enemy.EngageEnemy();
+
+        if (!RaycastCheck2D(sensor.playerDetection))
+            enemy.ChangeEnemyState(new PatrolState());
     }
 
     public void OnStateExit()
     {
-        return;
+        enemy.ResetEnemy();
     }
 
-    public string RaycastCheck2D(RaycastHit2D raycast)
+    public bool RaycastCheck2D(RaycastHit2D raycast)
     {
-        throw new System.NotImplementedException();
+        if (raycast)
+            return true;
+        else
+            return false;
     }
 }

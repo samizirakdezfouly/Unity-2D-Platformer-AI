@@ -7,5 +7,5 @@ public interface IEnemyStates {
     void OnStateEnter(EnemyBehaviour enemy, EnemySensor sensor);
     void OnStateExit();
     void ExecuteState();
-    string RaycastCheck2D(RaycastHit2D raycast);
+    bool RaycastCheck2D(RaycastHit2D raycast);
 }

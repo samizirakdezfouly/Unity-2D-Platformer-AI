@@ -28,7 +28,8 @@ public class EnemyMovement : MonoBehaviour {
 
     private Rigidbody2D enemyRb;
 
-    private bool playerDisabled = false;
+    private bool playerDisabled;
+    
 
     public PlayerHealth playerHealth;
 

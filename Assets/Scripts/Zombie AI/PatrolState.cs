@@ -16,6 +16,12 @@ public class PatrolState : IEnemyStates {
     public void ExecuteState()
     {
         Debug.Log("Enemy Is Patroling");
+
+        enemy.Patrol();
+
+        if (RaycastCheck2D(sensor.playerDetection))
+            enemy.ChangeEnemyState(new EnagagePlayerState());
+
     }
 
     public void OnStateExit()
@@ -23,8 +29,12 @@ public class PatrolState : IEnemyStates {
         return;
     }
 
-    public string RaycastCheck2D(RaycastHit2D raycast)
+    public bool RaycastCheck2D(RaycastHit2D raycast)
     {
-        throw new System.NotImplementedException();
+        if (raycast)
+            return true;
+        else
+            return false;
+
     }
 }
