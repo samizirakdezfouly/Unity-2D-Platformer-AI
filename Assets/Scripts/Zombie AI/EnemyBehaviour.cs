@@ -97,7 +97,7 @@ public class EnemyBehaviour : MonoBehaviour {
 
     public void Patrol()
     {
-        if (enemySensor.patrolDetection == false || enemySensor.patrolDetection.collider.name == "Crate")
+        if (enemySensor.patrolDetection == false || enemySensor.patrolDetection.collider.name == "Crate" || enemySensor.patrolDetection.collider.name == "Zombie")
             ChangeDirection();
        
 

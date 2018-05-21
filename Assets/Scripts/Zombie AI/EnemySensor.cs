@@ -19,7 +19,7 @@ public class EnemySensor : MonoBehaviour {
 
 	void Start ()
     {
-        patrolSensorDetectables = LayerMask.GetMask("Cover", "Platforms");
+        patrolSensorDetectables = LayerMask.GetMask("Cover", "Platforms","Enemy");
         playerSensorDetectables = LayerMask.GetMask("Player");
 
         playerDetection = Physics2D.Linecast(playerDetectionStart.position, playerDetectionEnd.position, playerSensorDetectables);
